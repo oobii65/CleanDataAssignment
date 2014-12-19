@@ -33,13 +33,35 @@ run_analysis <- function() {
   
   ## replace activity code with activity names
   for (i in 1:nrow(activities) ) {
-    valCombined$Activity[valCombined$Activity == activities[i,1]] <- activities[i,2];
+      valCombined$Activity[valCombined$Activity == activities[i,1]] <- activities[i,2];
   }
 
   valCombined;
 
   ## Make the tidy data set
+  ## Sort according to subject and activity
+  valCombined <- valCombined[ order(valCombined[,1], valCombined[,2]), ]; 
   
+  meanList <- list();
+  ii <- 0;
+  for (i in 1:valCombined[nrow(valCombined), 1] ) {
+      for (j in 1:nrow(activities) ) {
+        oneSet <- subset(valCombined, (valCombined[,1] == i) & (valCombined[,2] == activities[j,2]));
+        meanData <- t(colMeans(oneSet[,3:ncol(oneSet)]));
+        meanData <- cbind(activities[j,2], meanData);
+        meanData <- cbind(i, meanData);
+        ii <- ii+1;
+        meanList[[ii]] <- meanData;
+      }
+  }
+
+  ## Make result df and change col names
+  result <- data.frame(t(sapply(meanList,c)));
+  colnames(result) <- featuresCombined;
   
+  ## Write data to file
+  write.table(result, "mydata.txt", row.name=FALSE ) 
   
+  result;
+
 }
