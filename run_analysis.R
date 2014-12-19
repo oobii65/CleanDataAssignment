@@ -1,21 +1,21 @@
 run_analysis <- function() {
 
   ## Read features
-  features <- read.table("/R/coursera/UCI HAR Dataset/features.txt");
+  features <- read.table("./UCI HAR Dataset/features.txt");
   idx <- grep("mean()|std()", features[,2]); ## get index of all columns containing mean() and std() data 
   
   ## Read activity codes
-  activities <- as.matrix(read.table("/R/coursera/UCI HAR Dataset/activity_labels.txt"));
+  activities <- as.matrix(read.table("./UCI HAR Dataset/activity_labels.txt"));
   
   ## Read Test set
-  subTestSet <- read.table("/R/coursera/UCI HAR Dataset/test/subject_test.txt");
-  actTestSet <- read.table("/R/coursera/UCI HAR Dataset/test/y_test.txt");
-  valTestSet <- read.table("/R/coursera/UCI HAR Dataset/test/X_test.txt");
+  subTestSet <- read.table("./UCI HAR Dataset/test/subject_test.txt");
+  actTestSet <- read.table("./UCI HAR Dataset/test/y_test.txt");
+  valTestSet <- read.table("./UCI HAR Dataset/test/X_test.txt");
   
   ## Read Train set
-  subTrainSet <- read.table("/R/coursera/UCI HAR Dataset/train/subject_train.txt");
-  actTrainSet <- read.table("/R/coursera/UCI HAR Dataset/train/y_train.txt");
-  valTrainSet <- read.table("/R/coursera/UCI HAR Dataset/train/X_train.txt");
+  subTrainSet <- read.table("./UCI HAR Dataset/train/subject_train.txt");
+  actTrainSet <- read.table("./UCI HAR Dataset/train/y_train.txt");
+  valTrainSet <- read.table("./UCI HAR Dataset/train/X_train.txt");
   
   ## Make a combined set containing only mean() and std() columns
   subCombined <- rbind(subTestSet, subTrainSet);
