@@ -7,7 +7,7 @@ run_analysis <- function() {
   ## Read activity codes
   activities <- as.matrix(read.table("./UCI HAR Dataset/activity_labels.txt"));
   
-  ## Read Test set
+  ## Read Test set ---
   subTestSet <- read.table("./UCI HAR Dataset/test/subject_test.txt");
   actTestSet <- read.table("./UCI HAR Dataset/test/y_test.txt");
   valTestSet <- read.table("./UCI HAR Dataset/test/X_test.txt");
